@@ -1,0 +1,7 @@
+{
+  "name": "e-commerce-parcial-vue",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
