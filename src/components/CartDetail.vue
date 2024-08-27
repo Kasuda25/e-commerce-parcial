@@ -25,6 +25,7 @@
 import { onBeforeMount, ref } from 'vue';
 import { IonCard, IonCardContent, IonToast } from '@ionic/vue';
 import ProductService from '@/services/product.js';
+import CurrencyFormatter from '@/helpers/currency.js';
 import { useCartStore } from '@/store/cart';
 
 const cartStore = useCartStore();
@@ -36,15 +37,10 @@ const props = defineProps({
 
 const product = ref();
 
-const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD'
-});
-
 onBeforeMount(async () => {
     product.value = await ProductService.getProduct(props.productId);
 
-        product.value.price = formatter.format(product.value.price);
+    product.value.price = CurrencyFormatter.toUsd(product.value.price);
 });
 
 const removeItem = (id) => {
@@ -60,7 +56,7 @@ const removeItem = (id) => {
 
     const total = totalInt - productPriceInt;
 
-    cartStore.cart.total = formatter.format(total);
+    cartStore.cart.total = CurrencyFormatter.toUsd(total);
 };
 </script>
 

@@ -26,24 +26,19 @@
 import { onBeforeMount, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import ProductService from '@/services/product.js';
+import CurrencyFormatter from '@/helpers/currency.js';
 
 const router = useRouter();
-
-const product = ref();
 
 const props = defineProps({
     productId: Number,
 });
-
-const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD'
-});
+const product = ref();
 
 onBeforeMount(async () => {
     product.value = await ProductService.getProduct(props.productId);
 
-    product.value.price = formatter.format(product.value.price);
+    product.value.price = CurrencyFormatter.toUsd(product.value.price);
 });
 
 const viewProduct = async () => {

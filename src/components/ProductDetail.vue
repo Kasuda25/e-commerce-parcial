@@ -21,8 +21,8 @@
                 </div>
                 <div class="pt-3 px-4 bottom">
                     <div class="row">
-                        <div class="col text-center"><span class="fs-5">Bought: {{ product.rating.count }}+</span></div>
-                        <div class="col text-center"><span class="fs-5">{{ product.rating.rate }}<i class="fa-regular fa-star fa-sm"></i></span></div>
+                        <div class="col text-start"><span class="fs-5">Bought: {{ product.rating.count }}+</span></div>
+                        <div class="col text-end"><span class="fs-5">{{ product.rating.rate }}<i class="fa-regular fa-star fa-sm"></i></span></div>
                     </div>
                 </div>
             </div>
@@ -32,18 +32,14 @@
 
 <script setup>
 import { onBeforeMount } from 'vue';
+import CurrencyFormatter from '@/helpers/currency.js';
 
 const props = defineProps({
     product: Object,
 });
 
-const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD'
-});
-
 onBeforeMount(() => {
-    props.product.price = formatter.format(props.product.price);
+    props.product.price = CurrencyFormatter.toUsd(props.product.price);
 });
 </script>
 

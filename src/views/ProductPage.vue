@@ -21,6 +21,7 @@ import { useRouter } from 'vue-router';
 import Navbar from '../components/Navbar.vue';
 import ProductDetail from '@/components/ProductDetail.vue';
 import ProductService from '@/services/product.js';
+import CurrencyFormatter from '@/helpers/currency.js';
 import { useCartStore } from '@/store/cart.js';
 
 const router = useRouter();
@@ -39,11 +40,6 @@ onBeforeMount(async () => {
     product.value = await ProductService.getProduct(props.id);
 });
 
-const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD'
-});
-
 const addToCart = async () => {
     const productPrice = parseInt(product.value.price.substring(1));
 
@@ -57,7 +53,7 @@ const addToCart = async () => {
         priceInt = parseInt(cartStore.cart.total.substring(1)) + productPrice;
     };
 
-    cartStore.cart.total = formatter.format(priceInt);
+    cartStore.cart.total = CurrencyFormatter.toUsd(priceInt);
     setOpen(true);
 };
 
