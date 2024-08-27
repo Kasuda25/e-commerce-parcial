@@ -10,7 +10,7 @@
                         <ion-title size="large">{{ name }}</ion-title>
                     </div>
                 </div>
-                <div class="col text-end my-auto me-3" @click="viewCart">
+                <div v-if="showCartIcon" class="col text-end my-auto me-3" @click="viewCart">
                     <i class="fa-solid fa-cart-shopping fa-xl"></i>
                 </div>
             </div>
@@ -23,6 +23,7 @@ import { useRouter } from 'vue-router';
 
 const props = defineProps({
     showBackButton: Boolean,
+    showCartIcon: Boolean,
     name: String,
 });
 

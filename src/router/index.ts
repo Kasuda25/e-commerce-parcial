@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import HomePage from '../views/HomePage.vue';
 import CartPage from '../views/CartPage.vue';
+import ProductPage from '../views/ProductPage.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -18,6 +19,12 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Cart',
     component: CartPage
   },
+  {
+    path: '/product/:id',
+    name: 'Product',
+    component: ProductPage,
+    props: true
+  }
 ]
 
 const router = createRouter({

@@ -1,10 +1,10 @@
 <template>
   <ion-page>
     <ion-content :fullscreen="true">
-      <Navbar :showBackButton="false" :name="'Tienda virtual'" />
+      <Navbar :showBackButton="false" :showCartIcon="true" :name="'Virtual Store'" />
 
       <div id="container pt-3">
-        <div class="py-5 px-5">
+        <div class="pt-5 pb-3 px-5">
           <ion-select placeholder="Category" v-model="category" @ionChange="handleChange()">
             <ion-select-option value="all">All</ion-select-option>
             <ion-select-option value="electronics">Electronics</ion-select-option>
@@ -12,6 +12,7 @@
             <ion-select-option value="men's clothing">Men's clothing</ion-select-option>
             <ion-select-option value="women's clothing">Women's clothing</ion-select-option>
           </ion-select>
+
         </div>
         <div class="row row-cols-2">
           <div v-for="product in products" :key="product">
@@ -25,7 +26,7 @@
 
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSelect, IonSelectOption } from '@ionic/vue';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSelect, IonSelectOption, IonGrid, IonRow, IonCol } from '@ionic/vue';
 
 import Navbar from '../components/Navbar.vue';
 import ProductService from '@/services/product.js';
